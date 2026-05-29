@@ -23,8 +23,13 @@ func main() {
 	fmt.Print("Combien de notes voulez-vous entrer ? ")
 	fmt.Scan(&nombreNotes)
 
-	// Création d'un slice vide pour stocker les notes
-	notes := []float64{}
+	// Création d'un slice avec make
+	// Longueur = 0 car il est vide au départ
+	// Capacité = nombreNotes car on sait combien de notes on veut ajouter
+	notes := make([]float64, 0, nombreNotes)
+
+	fmt.Println("Longueur au début :", len(notes))
+	fmt.Println("Capacité au début :", cap(notes))
 
 	// Boucle for unique pour saisir les notes et calculer la somme
 	for i := 0; i < nombreNotes; i++ {
@@ -33,9 +38,15 @@ func main() {
 		fmt.Printf("Entrez la note %d : ", i+1)
 		fmt.Scan(&note)
 
+		// Ajout de la note dans le slice
 		notes = append(notes, note)
+
+		// Ajout de la note à la somme
 		somme += note
 	}
+
+	fmt.Println("Longueur après ajout :", len(notes))
+	fmt.Println("Capacité après ajout :", cap(notes))
 
 	// Calcul de la moyenne
 	moyenne := somme / float64(len(notes))
